@@ -17,6 +17,7 @@ hi MatchParen ctermbg=magenta guibg=#2C2560
 " let g:tokyonight_enable_italic = 1
 " colorscheme tokyonight
 colorscheme one-nvim
+" colorscheme base16-onedark
 " colorscheme onedark
 
 "--

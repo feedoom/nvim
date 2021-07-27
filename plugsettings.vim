@@ -79,10 +79,10 @@ cnoreabbrev tl CocList todolist
 cnoreabbrev tc CocCommand todolist.clear
 
 " navigate chunks of current buffer
-nmap [g <Plug>(coc-git-prevchunk)
-nmap ]g <Plug>(coc-git-nextchunk)
+" nmap [g <Plug>(coc-git-prevchunk)
+" nmap ]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
-nmap gs <Plug>(coc-git-chunkinfo)
+" nmap gs <Plug>(coc-git-chunkinfo)
 
 
 
@@ -346,85 +346,135 @@ autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
 "== fzf.vim ----------------------------------
 "--
 " 查找文件
-"noremap <C-p> :FZF<CR>
-" noremap <C-p> :Files<CR>
-silent! nmap <C-P> :GFiles<CR>
-" 查找文件内容
+""noremap <C-p> :FZF<CR>
+"" noremap <C-p> :Files<CR>
+"silent! nmap <C-P> :GFiles<CR>
+"" 查找文件内容
+""noremap <C-f> :Ag<CR>
 "noremap <C-f> :Ag<CR>
-noremap <C-f> :Ag<CR>
-" 历史打开的文件
-noremap <C-s> :MRU<CR>
-" 查找tag
-noremap <C-t> :BTags<CR>
-" 跳转打开的文件
-noremap <C-b> :Buffers<CR>
-" 预览每一行
-noremap <C-l> :Lines<CR>
-" 历史命令
-noremap <C-h> :History:<CR>
+"" 历史打开的文件
+"noremap <C-s> :MRU<CR>
+"" 查找tag
+"noremap <C-t> :BTags<CR>
+"" 跳转打开的文件
+"noremap <C-b> :Buffers<CR>
+"" 预览每一行
+"noremap <C-l> :Lines<CR>
+"" 历史命令
+"noremap <C-h> :History:<CR>
 
-autocmd! Filetype fzf
-autocmd  Filetype fzf set laststatus=0 noruler
-            \| autocmd BufLeave <buffer> set laststatus=2 ruler
+"autocmd! Filetype fzf
+"autocmd  Filetype fzf set laststatus=0 noruler
+"            \| autocmd BufLeave <buffer> set laststatus=2 ruler
 
-command! -bang -nargs=* Buffers
-            \ call fzf#vim#buffers(
-            \   '',
-            \   <bang>0 ? fzf#vim#with_preview('up:60%')
-            \           : fzf#vim#with_preview('right:0%', '?'),
-            \   <bang>0)
+"command! -bang -nargs=* Buffers
+"            \ call fzf#vim#buffers(
+"            \   '',
+"            \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"            \           : fzf#vim#with_preview('right:0%', '?'),
+"            \   <bang>0)
 
 
-command! -bang -nargs=* LinesWithPreview
-            \ call fzf#vim#grep(
-            \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
-            \   fzf#vim#with_preview({}, 'up:50%', '?'),
-            \   1)
+"command! -bang -nargs=* LinesWithPreview
+"            \ call fzf#vim#grep(
+"            \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+"            \   fzf#vim#with_preview({}, 'up:50%', '?'),
+"            \   1)
 
-command! -bang -nargs=* Ag
-            \ call fzf#vim#ag(
-            \   '',
-            \   <bang>0 ? fzf#vim#with_preview('up:60%')
-            \           : fzf#vim#with_preview('down:50%', '?'),
-            \   <bang>0)
+"command! -bang -nargs=* Ag
+"            \ call fzf#vim#ag(
+"            \   '',
+"            \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"            \           : fzf#vim#with_preview('down:50%', '?'),
+"            \   <bang>0)
 
-command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
+"command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
 
-command! -bang BTags
-            \ call fzf#vim#buffer_tags('', {
-            \     'down': '40%',
-            \     'options': '--with-nth 1
-            \                 --reverse
-            \                 --prompt "> "
-            \                 --preview-window="70%"
-            \                 --preview "
-            \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
-            \                     head -n 16"'
-            \ })
+"command! -bang BTags
+"            \ call fzf#vim#buffer_tags('', {
+"            \     'down': '40%',
+"            \     'options': '--with-nth 1
+"            \                 --reverse
+"            \                 --prompt "> "
+"            \                 --preview-window="70%"
+"            \                 --preview "
+"            \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
+"            \                     head -n 16"'
+"            \ })
 
-let g:fzf_preview_window = 'down:60%'
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+"let g:fzf_preview_window = 'down:60%'
+"let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
-function! s:list_buffers()
-    redir => list
-    silent ls
-    redir END
-    return split(list, "\n")
-endfunction
+"function! s:list_buffers()
+"    redir => list
+"    silent ls
+"    redir END
+"    return split(list, "\n")
+"endfunction
 
-function! s:delete_buffers(lines)
-    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
-endfunction
+"function! s:delete_buffers(lines)
+"    execute 'bwipeout' join(map(a:lines, {_, line -> split(line)[0]}))
+"endfunction
 
-command! BD call fzf#run(fzf#wrap({
-            \ 'source': s:list_buffers(),
-            \ 'sink*': { lines -> s:delete_buffers(lines) },
-            \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
-            \ }))
+"command! BD call fzf#run(fzf#wrap({
+"            \ 'source': s:list_buffers(),
+"            \ 'sink*': { lines -> s:delete_buffers(lines) },
+"            \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
+"            \ }))
 
-"noremap <c-d> :BD<CR>
+""noremap <c-d> :BD<CR>
 
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+"let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+"nnoremap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
+
+
+
+"--
+"== telescope ----------------------------------
+"--
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup{
+    defaults = {
+        vimgrep_arguments = {
+            'rg',
+            '--color=never',
+            '--no-heading',
+            '--with-filename',
+            '--line-number',
+            '--column',
+            '--smart-case',
+            '--ignore',
+            '--hidden'
+        },
+        file_ignore_patterns = {
+            ".git",
+            "node_modules"
+        },
+        prompt_prefix = "🔎 ",
+        mappings = {
+            i = {
+                ["<C-k>"] = actions.move_selection_previous,
+                ["<C-j>"] = actions.move_selection_next,
+                ["<esc>"] = actions.close
+            }
+        }
+    },
+    layout_strategy = "horizontal",
+}
+EOF
+nnoremap <c-f> <cmd>Telescope live_grep<CR>
+nnoremap <c-l> <cmd>Telescope current_buffer_fuzzy_find<CR>
+nnoremap <c-b> <cmd>Telescope buffers<CR>
+nnoremap <c-p> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
+nnoremap <c-s> <cmd>Telescope oldfiles<CR>
+nnoremap <c-e> <cmd>Telescope lsp_document_diagnostics<CR>
+nnoremap mc <cmd>Telescope vim_bookmarks all<CR>
+nnoremap <silent>gr    <cmd>Telescope lsp_references<CR>
+nnoremap <silent>gi    <cmd>Telescope lsp_implementations<CR>
+nnoremap <silent>gd    <cmd>Telescope lsp_definitions<CR>
+highlight TelescopeSelection guifg=#FF38A2 gui=bold
+highlight TelescopeMatching guifg=blue
 
 
 "--
@@ -481,9 +531,12 @@ require'lspconfig'.tsserver.setup{
   }
 }
 require'lspconfig'.vuels.setup{}
-require'fzf_lsp'.setup()
+require'lspconfig'.pyright.setup{}
+require'lspconfig'.html.setup{}
+require'lspconfig'.cssls.setup{}
+require'lspconfig'.bashls.setup{}
+-- require'fzf_lsp'.setup()
 EOF
-nnoremap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
 " nnoremap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent><c-i> <cmd>lua vim.lsp.buf.implementation()<CR>
 
@@ -799,7 +852,7 @@ let g:dashboard_default_executive ='fzf'
 "--
 lua << EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "javascript", "vue", "html", "css", "scss" },
+  ensure_installed = { "javascript", "vue", "html", "css", "scss", "typescript", "python", "bash" },
   highlight = {
     enable = true,
   },
@@ -920,7 +973,6 @@ set foldexpr=nvim_treesitter#foldexpr()
 " nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 " nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
 
 
 

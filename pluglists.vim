@@ -24,6 +24,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'ghifarit53/tokyonight-vim'
 " Plug 'navarasu/onedark.nvim'
 Plug 'Th3Whit3Wolf/one-nvim'
+Plug 'RRethy/nvim-base16'
 
 
 "autocomplete
@@ -32,7 +33,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " lsp
 Plug 'neovim/nvim-lspconfig'
-Plug 'gfanto/fzf-lsp.nvim'
 
 
 "html,css,js
@@ -100,8 +100,13 @@ Plug 'markonm/traces.vim'                                           " 预览:s/o
 
 
 "search
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+" Plug 'gfanto/fzf-lsp.nvim'
+" Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'haya14busa/incsearch.vim'                                     " 模糊搜素
 Plug 'haya14busa/incsearch-fuzzy.vim'                               " 模糊搜素
 Plug 'junegunn/vim-slash'                                           " 优化搜索，移动光标后清除高亮
