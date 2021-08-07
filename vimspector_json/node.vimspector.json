@@ -1,0 +1,22 @@
+{
+  "configurations": {
+    "run - node": {
+      "adapter": "vscode-node",
+      "configuration": {
+        "request": "launch",
+        "cwd": "${workspaceRoot}",
+        "program": "${file}",
+        "stopOnEntry": true,
+        "type": "node",
+        "console": "integratedTerminal"
+      },
+      "breakpoints": {
+        "exception": {
+          "raised": "N",
+          "uncaught": ""
+        }
+      }
+    }
+  }
+}
+

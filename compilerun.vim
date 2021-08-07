@@ -1,5 +1,6 @@
 " 运行当前文件
 noremap <F5> :call CompileRunGcc()<CR>
+noremap <leader>r :call CompileRunGcc()<CR>
 " noremap <leader>r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
 	exec "w"
@@ -21,9 +22,10 @@ func! CompileRunGcc()
 	elseif &filetype == 'sh'
 		:!time bash %
 	elseif &filetype == 'python'
-		set splitbelow
-		:sp
-		:term python3 %
+		" set splitbelow
+		" :sp
+		" :term python3 %
+		exec "!python %"
 	elseif &filetype == 'html'
         silent! exec "!".g:mkdp_browser." % &"
         " if empty(glob('~/.config/nvim/plugged/bracey.vim/'))

@@ -88,5 +88,7 @@
       "ts",
       "tsx",
       "typescript"
-    ]
+    ],
+    "translator.engines": ["bing"],
+    "translator.enableHover": true
 }

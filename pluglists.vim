@@ -55,7 +55,7 @@ Plug 'simrat39/symbols-outline.nvim'
 
 
 "format
-" Plug 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 
 
 "align
@@ -64,7 +64,6 @@ Plug 'junegunn/vim-easy-align'                                      " 对齐
 
 "Editor Enhancement
 Plug 'kien/rainbow_parentheses.vim'                                 " 括号高亮
-" Plug 'tomtom/tcomment_vim'                                          " 注释
 Plug 'tpope/vim-commentary'                                         " 注释
 Plug 'jiangmiao/auto-pairs'                                         " 自动匹配括号
 Plug 'tpope/vim-surround'
@@ -77,7 +76,6 @@ Plug 'junegunn/goyo.vim'
 Plug 'terryma/vim-expand-region'                                    " +,_,增加可视模式选择的文本
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'gcmt/wildfire.vim'                                            " enter 快速选择文本
-" Plug 'Yggdroot/indentLine'                                          " 缩进线
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'famiu/bufdelete.nvim'
 
@@ -87,7 +85,6 @@ Plug 'kana/vim-textobj-user'                                        " 文本对�
 Plug 'kana/vim-textobj-line'                                        " 行文本对象
 Plug 'coderifous/textobj-word-column.vim'                           " 列文本对象
 Plug 'junegunn/vim-after-object'                                    " -, :, #, =
-Plug 'vim-scripts/argtextobj.vim'                                     " argument
 Plug 'rhysd/vim-textobj-anyblock'                                    " b instead ', (), {}, [] and <>
 Plug 'wellle/targets.vim'
 
@@ -96,7 +93,7 @@ Plug 'wellle/targets.vim'
 " Plug 'svermeulen/vim-subversive'                                    " 快速替换
 " Plug 'tpope/vim-abolish'                                            " subversive depend
 Plug 'markonm/traces.vim'                                           " 预览:s/old/new/
-" Plug 'brooth/far.vim', { 'on': ['F', 'Far', 'Fardo'] }
+Plug 'romgrk/searchReplace.vim'
 
 
 "search
@@ -117,7 +114,6 @@ Plug 'osyo-manga/vim-anzu'                                          " 显示当�
 "git
 Plug 'iberianpig/tig-explorer.vim'
 Plug 'rbgrouleff/bclose.vim'
-" Plug 'APZelos/blamer.nvim'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'sindrets/diffview.nvim'
@@ -125,7 +121,7 @@ Plug 'sindrets/diffview.nvim'
 
 "move
 Plug 'andymass/vim-matchup'                                         " %快速跳转
-Plug 'easymotion/vim-easymotion'                                    " 快速跳转
+Plug 'phaazon/hop.nvim'
 Plug 'psliwka/vim-smoothie'
 Plug 'rhysd/clever-f.vim'                                           " 增强f,F
 Plug 't9md/vim-choosewin'                                           " 跳转窗口
@@ -161,6 +157,10 @@ Plug 'windwp/nvim-ts-autotag'                                       " 关闭 tag
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                  " 注释
 
 
+" debug
+Plug 'puremourning/vimspector'
+
+
 "others
 Plug 'lambdalisue/suda.vim'                                         " sudo 写入
 Plug 'vim-utils/vim-man'                                            " vim open man for :Vman
@@ -186,9 +186,9 @@ Plug 'glepnir/dashboard-nvim'
 " Plug 't9md/vim-textmanip'                                           " ctrl-h,j,k,l to move text
 " Plug 'matze/vim-move'                                               " alt-h,j,k,l to move text
 " Plug 'nicwest/vim-http'
-" Plug 'romgrk/searchReplace.vim'
-" Plug 'nvim-telescope/telescope.nvim'
-
+" Plug 'ray-x/navigator.lua'
+" Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
+" Plug 'michaelb/sniprun', {'do': 'bash install.sh'}
 
 call plug#end()
 

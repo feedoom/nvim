@@ -8,7 +8,7 @@ set complete=.,w,b,u,t
 "inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-cssmodules', 'coc-tsserver', 'coc-html', 'coc-css', 'coc-xml', 'coc-snippets', 'coc-translator', 'coc-lists', 'coc-yank', 'coc-json', 'coc-emmet', 'coc-marketplace', 'coc-word', 'coc-highlight', 'coc-calc', 'coc-todolist', 'coc-explorer', 'coc-vetur', 'coc-go', 'coc-htmlhint', 'coc-wxml']
+let g:coc_global_extensions = ['coc-cssmodules', 'coc-tsserver', 'coc-html', 'coc-css', 'coc-xml', 'coc-snippets', 'coc-translator', 'coc-lists', 'coc-yank', 'coc-json', 'coc-emmet', 'coc-marketplace', 'coc-word', 'coc-highlight', 'coc-calc', 'coc-todolist', 'coc-explorer', 'coc-vetur', 'coc-go', 'coc-htmlhint', 'coc-wxml', 'coc-jedi']
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
     let col = col('.') - 1
@@ -210,7 +210,7 @@ noremap <silent> tg :SymbolsOutline<CR>
 "--
 "== vim-autoformat ----------------------------------
 "--
-" nnoremap <leader>fo :Autoformat<CR>
+nnoremap <leader>fo :Autoformat<CR>
 " au BufWrite * :Autoformat    " 自动格式化
 "let g:formatdef_eslint = '"SRC=eslint-temp-${RANDOM}.js; cat - >$SRC; eslint --fix $SRC >/dev/null 2>&1; cat $SRC | perl -pe \"chomp if eof\"; rm -f $SRC"'
 "let g:formatters_javascript = ['eslint']
@@ -298,25 +298,45 @@ let g:bookmark_highlight_lines = 1
 
 
 "--
-"== indentLine ----------------------------------
-"--
-" let g:indentLine_char = '¦'  ", '¦', '┆', '┊'
-" let g:indentLine_setColors = 0
-" let g:indentLine_color_term = 17
-" let g:indentLine_noConcealCursor = ""
-" let g:indentLine_bgcolor_gui = '#303030'
-
-
-"--
 "== indent-blankline.nvim ----------------------------------
 "--
-let g:indent_blankline_filetype_exclude = ["vista", "dashboard", "dashpreview", "coc-explorer"]
+" let g:indent_blankline_filetype_exclude = ["vista", "dashboard", "dashpreview", "coc-explorer"]
 
 
 "--
 "== bufdelete ----------------------------------
 "--
 cnoreabbrev bd Bd
+
+
+"--
+"== textobj-anyblock ----------------------------------
+"--
+let g:textobj#anyblock#blocks = [
+	\ '(',
+	\ '{',
+	\ '[',
+	\ '(',
+	\ '"',
+	\ '<',
+	\ '>',
+	\ '=',
+	\ ',',
+	\ '`',
+	\ '-',
+	\ ':',
+	\ '#',
+	\ '/',
+	\ '.',
+	\ '\',
+	\ '|',
+	\ '$',
+	\ '&',
+	\ '_',
+	\ 't',
+	\ ';',
+	\ '*',
+	\ "'" ]
 
 
 "--
@@ -436,6 +456,10 @@ lua << EOF
 local actions = require('telescope.actions')
 require('telescope').setup{
     defaults = {
+        layout_strategy = "horizontal",
+        layout_config = {
+            horizontal = { preview_cutoff = 112 },
+        },
         vimgrep_arguments = {
             'rg',
             '--color=never',
@@ -451,7 +475,7 @@ require('telescope').setup{
             ".git",
             "node_modules"
         },
-        prompt_prefix = "🔎 ",
+        prompt_prefix = "—— ",
         mappings = {
             i = {
                 ["<C-k>"] = actions.move_selection_previous,
@@ -460,12 +484,12 @@ require('telescope').setup{
             }
         }
     },
-    layout_strategy = "horizontal",
 }
 EOF
 nnoremap <c-f> <cmd>Telescope live_grep<CR>
 nnoremap <c-l> <cmd>Telescope current_buffer_fuzzy_find<CR>
 nnoremap <c-b> <cmd>Telescope buffers<CR>
+nnoremap <c-h> <cmd>Telescope command_history<CR>
 nnoremap <c-p> <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
 nnoremap <c-s> <cmd>Telescope oldfiles<CR>
 nnoremap <c-e> <cmd>Telescope lsp_document_diagnostics<CR>
@@ -516,14 +540,8 @@ map z/ <Plug>(incsearch-fuzzy-/)
 
 
 "--
-"== Far.vim ----------------------------------
+"== lsp ----------------------------------
 "--
-"noremap <LEADER>ff :F  **/*<left><left><left><left><left>
-"let g:far#mapping = {
-            "\ "replace_undo" : ["l"],
-            "\ }
-
-
 lua << EOF
 require'lspconfig'.tsserver.setup{
   flags = {
@@ -531,7 +549,7 @@ require'lspconfig'.tsserver.setup{
   }
 }
 require'lspconfig'.vuels.setup{}
-require'lspconfig'.pyright.setup{}
+require'lspconfig'.jedi_language_server.setup{}
 require'lspconfig'.html.setup{}
 require'lspconfig'.cssls.setup{}
 require'lspconfig'.bashls.setup{}
@@ -540,13 +558,6 @@ EOF
 " nnoremap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent><c-i> <cmd>lua vim.lsp.buf.implementation()<CR>
 
-
-
-"--
-"== blamer.nvim ----------------------------------
-"--
-" let g:blamer_enabled = 1
-" let g:blamer_show_in_visual_modes = 0
 
 
 "--
@@ -587,10 +598,10 @@ require('gitsigns').setup {
   current_line_blame_position = 'eol',
   sign_priority = 6,
   update_debounce = 100,
-  status_formatter = nil, -- Use default
+  status_formatter = nil,
   word_diff = false,
   use_decoration_api = true,
-  use_internal_diff = true,  -- If luajit is present
+  use_internal_diff = true,
 }
 EOF
 
@@ -608,12 +619,14 @@ let g:loaded_matchit = 1
 
 
 "--
-"== easymotion ----------------------------------
+"== hop.nvim ----------------------------------
 "--
-"单个字符
-nmap ff <Plug>(easymotion-bd-f)
-"移动到列
-nmap fff <Plug>(easymotion-sn)
+nnoremap <silent>ff    <cmd>HopWord<CR>
+nnoremap <silent>fff    <cmd>HopChar1<CR>
+highlight HopNextKey guifg=#FF38A2 gui=bold
+highlight HopNextKey1 guifg=#FF38A2 gui=bold
+highlight HopNextKey2 guifg=blue gui=bold
+" highlight HopUnmatched guifg=#FF38A2 gui=bold
 
 
 "--
@@ -693,26 +706,6 @@ nnoremap <leader>al :AnyJumpLastResults<CR>
 
 
 ""--
-""== vimspector ----------------------------------
-""--
-"let g:vimspector_enable_mappings = 'HUMAN'
-"function! s:read_template_into_buffer(template)
-"   " has to be a function to avoid the extra space fzf#run insers otherwise
-"   execute '0r ~/.config/nvim/sample_vimspector_json/'.a:template
-"endfunction
-"command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
-"           \   'source': 'ls -1 ~/.config/nvim/sample_vimspector_json',
-"           \   'down': 20,
-"           \   'sink': function('<sid>read_template_into_buffer')
-"           \ })
-"noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
-"sign define vimspectorBP text=☛ texthl=Normal
-"sign define vimspectorBPDisabled text=☞ texthl=Normal
-"sign define vimspectorPC text=🔶 texthl=SpellBad
-
-
-
-""--
 ""== ZFVimIM_pinyin ----------------------------------
 ""--
 "nnoremap <expr><silent> ;; ZFVimIME_keymap_toggle_n()
@@ -740,12 +733,6 @@ let g:vim_markdown_conceal = 0
 let g:vim_markdown_conceal_code_blocks = 0
 "==vim-json
 "let vim_json_syntax_conceal = 0
-
-
-"--
-"== vcoolor ----------------------------------
-"--
-" cnoreabbrev color VCoolor
 
 
 "--
@@ -779,16 +766,21 @@ let g:quickmenu_options = "LH"
 call quickmenu#append("# Run", '')
 call quickmenu#append("Run %{expand('%:t')}", 'call CompileRunGcc()', "Run current file")
 
-call quickmenu#append("# Git", '')
-call quickmenu#append("git 暂存区('s' to add)", 'Magit', "")
-call quickmenu#append("git log('d' to open)", 'GitLog', "")
+call quickmenu#append("# vimspector", '')
+call quickmenu#append("<F9>添加断点", 'call vimspector#ToggleBreakpoint()', "")
+call quickmenu#append("<F5>开始调试", 'call vimspector#Continue()', "")
+call quickmenu#append("<F10>单步跳过", 'call vimspector#StepOver()', "")
+call quickmenu#append("<F11>单步调试", 'call vimspector#StepInto()', "")
+call quickmenu#append("<F12>单步跳出", 'call vimspector#StepOut()', "")
+call quickmenu#append("<F4>重新调试", 'call vimspector#Restart()', "")
+call quickmenu#append("<F3>暂停调试", 'call vimspector#Stop()', "")
+call quickmenu#append("<F7>退出vimspector", 'VimspectorReset', "")
+call quickmenu#append("<F8>添加函数断点", 'call vimspector#AddFunctionBreakpoint()', "")
+
 
 call quickmenu#append("# spell", '')
 call quickmenu#append("spell('z=' to change)", 'set spell!', "")
 call quickmenu#append("codelf", 'call codelf#start()', "")
-
-call quickmenu#append("# yank", '')
-call quickmenu#append("yank", 'CocList -A --normal yank', "")
 
 call quickmenu#append("# markdown", '')
 call quickmenu#append("tablemode", 'TableModeToggle', "")
@@ -844,7 +836,7 @@ EOF
 "--
 "== dashboard ----------------------------------
 "--
-let g:dashboard_default_executive ='fzf'
+let g:dashboard_default_executive ='telescope'
 
 
 "--
@@ -853,6 +845,10 @@ let g:dashboard_default_executive ='fzf'
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { "javascript", "vue", "html", "css", "scss", "typescript", "python", "bash" },
+  matchup = {
+    enable = true,
+    -- disable = { "c", "ruby" },
+  },
   highlight = {
     enable = true,
   },
@@ -882,97 +878,13 @@ set foldexpr=nvim_treesitter#foldexpr()
 
 
 "--
-"== t9md/vim-textmanip ----------------------------------
+"== vimspector ----------------------------------
 "--
-" xmap <C-j> <Plug>(textmanip-move-down)
-" xmap <Space>d <Plug>(textmanip-duplicate-down)
-" nmap <Space>d <Plug>(textmanip-duplicate-down)
-" xmap <Space>D <Plug>(textmanip-duplicate-up)
-" nmap <Space>D <Plug>(textmanip-duplicate-up)
-"
-" xmap <C-k> <Plug>(textmanip-move-up)
-" xmap <C-h> <Plug>(textmanip-move-left)
-" xmap <C-l> <Plug>(textmanip-move-right)
-"
-" " toggle insert/replace with <F10>
-" nmap <F10> <Plug>(textmanip-toggle-mode)
-" xmap <F10> <Plug>(textmanip-toggle-mode)
-
-
-"--
-"== telescope ----------------------------------
-"--
-" lua << EOF
-" require('telescope').setup{
-"   defaults = {
-"     vimgrep_arguments = {
-"       'rg',
-"       '--color=never',
-"       '--no-heading',
-"       '--with-filename',
-"       '--line-number',
-"       '--column',
-"       '--smart-case'
-"     },
-"     prompt_position = "bottom",
-"     prompt_prefix = "> ",
-"     selection_caret = "> ",
-"     entry_prefix = "  ",
-"     initial_mode = "insert",
-"     selection_strategy = "reset",
-"     sorting_strategy = "descending",
-"     layout_strategy = "horizontal",
-"     layout_defaults = {
-"       horizontal = {
-"         mirror = false,
-"       },
-"       vertical = {
-"         mirror = false,
-"       },
-"     },
-"     file_sorter =  require'telescope.sorters'.get_fuzzy_file,
-"     file_ignore_patterns = {},
-"     generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
-"     shorten_path = true,
-"     winblend = 0,
-"     width = 0.75,
-"     preview_cutoff = 120,
-"     results_height = 1,
-"     results_width = 0.8,
-"     border = {},
-"     borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-"     color_devicons = true,
-"     use_less = true,
-"     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
-"     file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-"     grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-"     qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-"
-"     -- Developer configurations: Not meant for general override
-"     buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
-"   }
-" }
-" EOF
-" nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-" nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-" nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-" nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-
-
-" let g:searchReplace = get(g:, 'searchReplace', {})
-" let g:searchReplace.close_on_exit = v:true
-" let g:searchReplace.edit_command = 'edit'
-" command! -nargs=1 EditPreviousWindow :execute 'wincmd p | edit ' . <f-args>
-" let g:searchReplace.open_window = {->execute('aboveleft vsplit')}
-" " Open search prompt
-" nnoremap <silent><C-f><C-f> :Search<CR>
-" " Search directly for word under cursor
-" nnoremap <silent><C-f><C-w> :Search <C-R><C-W><CR>
-" nnoremap <silent><C-f>w     :Search <C-R><C-W><CR>
-" nnoremap <leader>ff <cmd>Telescope find_files<cr>
-" nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-" nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-
+let g:vimspector_install_gadgets = [ 'debugpy', 'vscode-node-debug2', 'debugger-for-chrome' ]
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_sidebar_width = 25
+let g:vimspector_bottombar_height = 5
+let g:vimspector_terminal_maxwidth = 25
+let g:vimspector_terminal_minwidth = 20
+nmap <F7> :VimspectorReset<cr>
 

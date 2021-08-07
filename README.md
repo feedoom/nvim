@@ -24,14 +24,19 @@ my nvim config
 
 `apt-get install xsel xclip`
 
-### nodejs,yarn for coc.nvim
+### lsp client
+`npm install -g typescript typescript-language-server vls vscode-langservers-extracted pyright`
+`pip install -U jedi-language-server`
 
-### leetcode
-pip3 install keyring browser-cookie3
+### vCoolor
+`sudo apt install (Zenity or Yad)`
 
+### telescope
+`sudo apt install ripgrep fd`
+
+### searchReplace
+`sudo apt install sed`
 
 ### END
 安装完后应运行`:checkhealth`
 
-### lsp client
-npm install -g typescript typescript-language-server vls vscode-langservers-extracted pyright
