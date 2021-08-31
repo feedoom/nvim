@@ -853,7 +853,12 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
   indent = {
-    enable = true
+    enable = true,
+    disable = { "python"},
+  },
+  pyfold = {
+    enable = true,
+    custom_foldtext = true,
   },
   autotag = {
     enable = true,
@@ -887,4 +892,13 @@ let g:vimspector_bottombar_height = 5
 let g:vimspector_terminal_maxwidth = 25
 let g:vimspector_terminal_minwidth = 20
 nmap <F7> :VimspectorReset<cr>
+
+
+"--
+"== vim-textmanip ----------------------------------
+"--
+" xmap <m-j> <Plug>(textmanip-move-down)
+" xmap <m-k> <Plug>(textmanip-move-up)
+" xmap <m-h> <Plug>(textmanip-move-left)
+" xmap <m-l> <Plug>(textmanip-move-right)
 

@@ -1,24 +1,32 @@
 " set background=dark    " Setting dark mode
-"colorscheme space_vim_theme
-"colorscheme deus
-" colorscheme one
-"colorscheme dracula
-"colorscheme snazzy
 " colorscheme synthwave84
 " colorscheme xcodewwdc
 " let g:onedark_style = 'cool'
-" colorscheme space_vim_theme
-" colorscheme zephyr
-" colorscheme dracula
 hi MatchParen ctermbg=magenta guibg=#2C2560
 
 " set termguicolors
 " let g:tokyonight_style = 'storm'
 " let g:tokyonight_enable_italic = 1
 " colorscheme tokyonight
-colorscheme one-nvim
-" colorscheme base16-onedark
+
+" colorscheme one-nvim
 " colorscheme onedark
+" colorscheme space-nvim
+" colorscheme base16-onedark
+" colorscheme spacebuddy
+" colorscheme onebuddy
+colorscheme zephyr
+
+" colorscheme pinkmare
+" hi RedSign guibg=none
+" hi OrangeSign guibg=none
+" hi YellowSign guibg=none
+" hi GreenSign guibg=none
+" hi CyanSign guibg=none
+" hi BlueSign guibg=none
+" hi PurpleSign guibg=none
+" hi SignColumn guibg=none
+
 
 "--
 "== startify ----------------------------------

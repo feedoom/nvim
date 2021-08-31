@@ -142,9 +142,12 @@ inoremap jj <Esc>
 noremap H ^
 nnoremap L g_
 vnoremap L g_
+nnoremap <leader>w W
+nnoremap <leader>e E
+nnoremap <leader>b B
 
 
-"插入模式下移动 
+"插入模式下移动
 inoremap <c-l> <right>
 inoremap <c-h> <Left>
 inoremap <c-j> <down>
@@ -167,16 +170,16 @@ vnoremap Y "+y
 inoremap <c-u> <esc>bvE~ea
 "转换首单词大小写
 " inoremap <C-u> <esc>b~ea
-" noremap fi :r !figlet 
+" noremap fi :r !figlet
 "z= 显示建议
-noremap <leader>sp :set spell!<CR> 
+noremap <leader>sp :set spell!<CR>
 " 去掉搜索高亮
 noremap <silent><F3> :nohls<CR>
 noremap <silent><space> :nohls<CR>
 set pastetoggle=<F2> "F2进入粘贴模式
 
 
-" 标签页 
+" 标签页
 nnoremap tn :tabnext<CR>
 nnoremap tp :tabp<CR>
 noremap ]b :bnext<CR>

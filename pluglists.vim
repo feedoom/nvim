@@ -13,18 +13,20 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-web-devicons'
 " Plug 'artanikin/vim-synthwave84'
 " Plug 'arzg/vim-colors-xcode'
-" Plug 'Th3Whit3Wolf/space-nvim'
 " Plug 'bkegley/gloombuddy'
 " Plug 'Mofiqul/dracula.nvim'
-" Plug 'stonefeld/nordokai'
 " Plug 'shaunsingh/solarized.nvim'
-" Plug 'glepnir/zephyr-nvim'
-" Plug 'sainnhe/everforest'
 " Plug 'theniceboy/nvim-deus'
 " Plug 'ghifarit53/tokyonight-vim'
 " Plug 'navarasu/onedark.nvim'
-Plug 'Th3Whit3Wolf/one-nvim'
-Plug 'RRethy/nvim-base16'
+" Plug 'Th3Whit3Wolf/space-nvim'
+" Plug 'Th3Whit3Wolf/onebuddy'
+" Plug 'klooj/noogies'
+" Plug 'matsuuu/pinkmare'
+" Plug 'Th3Whit3Wolf/one-nvim'
+" Plug 'RRethy/nvim-base16'
+Plug 'feedoom/zephyr-nvim'
+Plug 'tjdevries/colorbuddy.nvim'
 
 
 "autocomplete
@@ -125,7 +127,6 @@ Plug 'phaazon/hop.nvim'
 Plug 'psliwka/vim-smoothie'
 Plug 'rhysd/clever-f.vim'                                           " 增强f,F
 Plug 't9md/vim-choosewin'                                           " 跳转窗口
-" Plug 'tommcdo/vim-exchange'                                         " cx{motion} 交互文本
 Plug 'justinmk/vim-sneak'
 Plug 'pechorin/any-jump.vim'                                        "函数跳转
 
@@ -155,6 +156,7 @@ Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'romgrk/nvim-treesitter-context'                               "显示当前函数
 Plug 'windwp/nvim-ts-autotag'                                       " 关闭 tag 标签
 Plug 'JoosepAlviste/nvim-ts-context-commentstring'                  " 注释
+Plug 'eddiebergman/nvim-treesitter-pyfold', { 'for': ['vim-plug', 'python'] }
 
 
 " debug
@@ -184,7 +186,8 @@ Plug 'glepnir/dashboard-nvim'
 " Plug 'chrisbra/NrrwRgn'                                             " 固定内容
 " Plug 'wellle/visual-split.vim'                                      " 将文本固定到分屏上
 " Plug 't9md/vim-textmanip'                                           " ctrl-h,j,k,l to move text
-" Plug 'matze/vim-move'                                               " alt-h,j,k,l to move text
+Plug 'tommcdo/vim-exchange'                                         " cx{motion} 交互文本
+Plug 'matze/vim-move'                                               " alt-h,j,k,l to move text
 " Plug 'nicwest/vim-http'
 " Plug 'ray-x/navigator.lua'
 " Plug 'ray-x/guihua.lua', {'do': 'cd lua/fzy && make' }
