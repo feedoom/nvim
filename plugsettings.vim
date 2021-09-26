@@ -634,6 +634,8 @@ highlight HopNextKey2 guifg=blue gui=bold
 "--
 let g:clever_f_smart_case = 1
 let g:clever_f_across_no_line = 0
+let g:clever_f_chars_match_any_signs = ';'
+let g:clever_f_show_prompt = 1
 
 
 "--
@@ -854,7 +856,7 @@ require'nvim-treesitter.configs'.setup {
   },
   indent = {
     enable = true,
-    disable = { "python"},
+    disable = { "python", "javascript"},
   },
   pyfold = {
     enable = true,
